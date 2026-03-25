@@ -1,10 +1,17 @@
 # Log Processor
 
+```bash
+git clone https://github.com/Maxim-Vasyutin/concurrent-log-processor.git
+cd concurrent-log-processor
+go build -o log-processor
+./log-processor --input-dir ./logs
+```
+
 ## 📋 Описание проекта
 
-Log Processor — это CLI-инструмент для анализа логов в микросервисной архитектуре.
+CLI-инструмент для анализа логов в микросервисных системах.
 
-Он помогает быстро находить причины сбоев, объединяя разрозненные записи из разных сервисов в единую хронологию по request_id. Это особенно полезно при расследовании инцидентов, когда один запрос проходит через несколько сервисов.
+Объединяет записи из разных сервисов по request_id, восстанавливает хронологию событий и помогает быстро находить причину сбоев.
 
 Инструмент решает проблемы:
 - ручного поиска по логам (grep/awk)
@@ -38,36 +45,31 @@ Log Processor — это CLI-инструмент для анализа лого
 ### Установка
 
 ```bash
-git clone https://github.com/Maxim-Vasyutin/concurrent-log-processor.git  
-cd concurrent-log-processor  
-go build -o concurrent-log-processor  
+git clone https://github.com/Maxim-Vasyutin/concurrent-log-processor.git
+cd concurrent-log-processor
+go build -o log-processor
+./log-processor --input-dir ./logs 
 ```
 
 ### Запуск
 
-#### Базовый запуск
-`./concurrent-log-processor`
-
 #### Указание директории с логами
-`./concurrent-log-processor --input-dir ./logs`
+`./log-processor --input-dir ./logs`
 
 #### Указание выходного файла
-`./concurrent-log-processor --input-dir ./logs --output-file result.json`
+`./log-processor --input-dir ./logs --output-file result.json`
 
 ---
+## 🎮 Примеры вывода
 
-## 🎮 Примеры использования
-
-`./log-processor --input-dir /var/log/microservices/`
-
-Вывод:
+#### Вывод:
 
 ```bash
 Processing 50 files with 8 workers...  
 ✓ Completed successfully in 2.1 seconds  
 ```
 
-При прерывании:
+#### При прерывании:
 
 ```bash
 ^C  
@@ -113,7 +115,7 @@ Received interrupt signal, shutting down gracefully...
 
 Проект построен по layered architecture:
 
-cli → scanner → processor → reporter
+CLI → Scanner → Processor → Reporter
 
 Структура проекта:
 
