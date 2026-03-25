@@ -37,44 +37,50 @@ Log Processor — это CLI-инструмент для анализа лого
 
 ### Установка
 
-git clone https://github.com/your-repo/log-processor.git  
-cd log-processor  
-go build -o log-processor  
+```bash
+git clone https://github.com/Maxim-Vasyutin/concurrent-log-processor.git  
+cd concurrent-log-processor  
+go build -o concurrent-log-processor  
+```
 
 ### Запуск
 
-# базовый запуск
-./log-processor
+#### Базовый запуск
+`./concurrent-log-processor`
 
-# указание директории с логами
-./log-processor --input-dir ./logs
+#### Указание директории с логами
+`./concurrent-log-processor --input-dir ./logs`
 
-# указание выходного файла
-./log-processor --input-dir ./logs --output-file result.json
+#### Указание выходного файла
+`./concurrent-log-processor --input-dir ./logs --output-file result.json`
 
 ---
 
 ## 🎮 Примеры использования
 
-./log-processor --input-dir /var/log/microservices/
+`./log-processor --input-dir /var/log/microservices/`
 
 Вывод:
 
+```bash
 Processing 50 files with 8 workers...  
 ✓ Completed successfully in 2.1 seconds  
+```
 
 При прерывании:
 
+```bash
 ^C  
 Received interrupt signal, shutting down gracefully...  
 ✓ Partial results saved  
-
+```
 ---
 
 ## 📊 Формат вывода
 
 Пример JSON-отчета:
 
+```json
 {
   "total_entries_processed": 1250,
   "failed_requests_found": 23,
@@ -91,7 +97,7 @@ Received interrupt signal, shutting down gracefully...
     }
   ]
 }
-
+```
 ---
 
 ## ⚡ Производительность
@@ -111,12 +117,14 @@ cli → scanner → processor → reporter
 
 Структура проекта:
 
+```bash
 internal/
   cli/        → обработка CLI аргументов  
   parser/     → парсинг логов  
   scanner/    → поиск файлов  
   processor/  → обработка и анализ  
   reporter/   → генерация JSON  
+```
 
 Основные принципы:
 
